@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<main>
+    <h2 class="text-over-form">Sign in</h2>
+    <form class="registerInputs" action="/" method="post">
+        <input type="text" placeholder="username" autocomplete="off" autofocus name="username">
+        <input type="text" placeholder="password" autocomplete="off" name="password">
+        <button type="submit" class="sign-button">Sign</button>
+    </form>
+</main>
+{% endblock %}
