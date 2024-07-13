@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <title>stolen things store</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +14,12 @@
     <header>
         <a href="/"><h1>StolenThings</h1></a>
         <div class="headerLinks">
-            <a href="/">sign in</a>
+            <a href="{% url 'sign' %}">sign in</a>
             <a href="/">register</a>
         </div>
     </header>
     {% block main %}
-    
+
     {% endblock %}
     <footer>
         <div class="footerLinks">
