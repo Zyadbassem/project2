@@ -15,7 +15,7 @@
         <a href="/"><h1>StolenThings</h1></a>
         <div class="headerLinks">
             <a href="{% url 'sign' %}">sign in</a>
-            <a href="/">register</a>
+            <a href="{% url 'register' %}">register</a>
         </div>
     </header>
     {% block main %}
