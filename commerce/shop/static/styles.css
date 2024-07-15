@@ -1,3 +1,23 @@
+
+main {
+    margin-top: 140px;
+}
+main, .registerInputs {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.error {
+    margin: 10px;
+    padding: 3px 10px;
+    background-color: rgb(255, 94, 94);
+    border-radius: 10px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,20 +26,21 @@
 }
 body {
     background-color: black;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    min-height: 100vh;
 }
 
 a {
     text-decoration: none;
 }
 header {
-    display: flex;
     width: 100%;
+    background-color: black; /* Example background color */
+    padding: 10px 0; /* Example padding */
+    display: flex;
     align-items: center;
     justify-content: space-around;
 }
@@ -33,31 +54,21 @@ header .headerLinks a {
     transition: 0.4s;
 }
 
-header .headerLinks a:hover {
-    transform: scale(1.3);
+header .headerLinks a:hover, .item:hover {
+    transform: scale(1.1);
 }
 
 header h1 {
     font-size: 30px;
 }
-main {
-    margin-top: 140px;
-}
 
-main, .registerInputs {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
 .text-over-form {
     font-size: 60px;
     font-weight: 500;
     padding-bottom: 20px;
 }
 
-.registerInputs input{
+.registerInputs input {
     margin: 8px;
     padding: 6px 22px;
     background-color: transparent;
@@ -81,7 +92,6 @@ input:focus {
 
 footer {
     margin-top: auto;
-    margin-bottom: 10px;
     padding-top: 10px;
     border-top: 1px solid #636262;
     display: flex;
@@ -110,9 +120,49 @@ footer {
     text-decoration: underline;
 }
 
-.error {
-    margin: 10px;
-    padding: 3px 10px;
-    background-color: rgb(255, 94, 94);
-    border-radius: 10px;
+
+img {
+    width: 150px;
+    height: 160px;
+}
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.itemsContainer {
+    width: 80%;
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: auto;
+    margin: auto;
+    gap: 10px;
+}
+.item {
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+    transition: 0.3s;
+}
+.itemprice {
+    color: rgb(100, 100, 100);
+}
+
+#add-button {
+    color: rgb(0, 0, 0);
+    padding: 4px 7px;
+    font-size: 10px;
+    background-color: white;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+@media (max-width: 850px){
+    .item {
+        width: 45%;
+    }
 }

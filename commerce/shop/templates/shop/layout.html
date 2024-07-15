@@ -14,8 +14,14 @@
     <header>
         <a href="/"><h1>StolenThings</h1></a>
         <div class="headerLinks">
+            {% if username %}
+            <a href="/" id="add-button">+</a>
+            <a href="/">{{ username }}</a>
+            <a href="{% url 'logout' %}">logout</a>
+            {% else %}
             <a href="{% url 'sign' %}">sign in</a>
             <a href="{% url 'register' %}">register</a>
+            {% endif %}
         </div>
     </header>
     {% block main %}

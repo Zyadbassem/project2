@@ -6,3 +6,10 @@ class user(models.Model):
     hashPassword = models.CharField(max_length=64)
     def __str__(self):
         return self.username
+    
+class item(models.Model):
+    itemName = models.CharField(max_length=64)
+    itemImage = models.URLField()
+    itemprice = models.CharField(max_length=10)
+    def __str__(self):
+        return self.itemName

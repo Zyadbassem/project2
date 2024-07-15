@@ -1,0 +1,14 @@
+{% extends 'shop/layout.html' %}
+{% block main %}
+<div class="wrapper">
+    <div class="itemsContainer">
+        {% for item in items %}
+        <a class="item" href="/{{ item.itemName }}">
+            <img src="{{ item.itemImage }}" alt="">
+            <p class="itemName">{{ item.itemName }}</p>
+            <p class="itemprice">{{ item.itemprice }}</p>
+        {% endfor %}
+        </a>
+    </div>
+</div>
+{% endblock %}

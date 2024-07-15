@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import user
+from .models import user, item
 from django.contrib.auth.hashers import make_password, check_password
-# Create your views here.
+from django.contrib.auth import logout as django_logout
 def sign(request):
     #if user sends a form
     if request.method == 'POST':
@@ -23,9 +23,12 @@ def sign(request):
             return render(request, 'shop/sign.html', {'error': "wrong password/username"})
         if not check_password(password, userEntering.hashPassword):
             return render(request, 'shop/sign.html', {'error': "wrong password/username"})
-        return HttpResponse("works")
+        request.session['username'] = username
+        return redirect("home")
     #if user access via get
     return render(request, 'shop/sign.html')
+
+
 
 def register(request):
     if request.method == "POST":
@@ -52,3 +55,37 @@ def register(request):
         userEntering.save()
         return redirect('sign')
     return render(request, 'shop/register.html')
+
+def home(request):
+    if 'username' in request.session:
+        allItems = item.objects.all()
+        return render(request, 'shop/home.html', {'username': request.session['username'], 'items': allItems})
+    else:
+        return redirect('sign')
+    
+def logout(request):
+    django_logout(request)
+    request.session.flush()
+    return redirect('sign')
+
+def addItems(request):
+    #check if user is logged in 
+    if 'username' in request.session:
+        #if user sends the form
+        if request.method == 'POST':
+            #get item info
+            item_Title = request.POST.get('item_name')
+            item_Price = request.POST.get('item_price')
+            item_Image = request.POST.get('item_image')
+            #check info
+            if not item_Image or not item_Price or item_Price < 1 or not item_Title:
+                return render(request, 'shop/adder.html', {'username': request.session['username'], 'error': 'Invalid input'})
+            #create a new item and saving it
+            newItem = item(itemName=item_Title, itemprice=item_Price, itemImage=item_Image)
+            newItem.save()
+            #redirecting to home page
+            return redirect('home')
+        #if the user access the page with get
+        return render(request, 'shop/adder.html')
+    #if the user is not logged in 
+    return redirect('sign')
