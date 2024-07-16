@@ -1,0 +1,17 @@
+{% extends 'shop/layout.html' %}
+{% block main %}
+<main id="itemPageView">
+    <img src="{{ item.itemImage }}" alt="item" class="big-image">
+    <div class="itemPagetextContainer">
+        <p class="imageItemTitle">{{ item.itemName }}</p>
+        <p class="imageItemprice">{{ item.itemprice }}</p>
+        <form action="" class="registerInputs">
+            <input type="number" placeholder="newBid">
+            <button class="sign-button" type="submit">Bid</button>
+        </form>    
+        {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    </div>
+</main>
+{% endblock %}

@@ -1,5 +1,5 @@
 
-main {
+main:not(#itemPageView) {
     margin-top: 140px;
 }
 main, .registerInputs {
@@ -159,6 +159,31 @@ img {
     background-color: white;
     font-weight: bold;
     border-radius: 7px;
+}
+#itemPageView {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#itemPageView img {
+    width: 50%;
+    max-width: 300px;
+    margin-bottom: 50px;
+    height: auto;
+}
+.imageItemTitle {
+    font-size: 40px;
+    color: white;
+    text-align: center;
+}
+.imageItemprice {
+    font-size: 20px;
+    color: gray;
+    text-align: center;
 }
 
 @media (max-width: 850px){

@@ -3,12 +3,13 @@
 <div class="wrapper">
     <div class="itemsContainer">
         {% for item in items %}
-        <a class="item" href="/{{ item.itemName }}">
+        <a class="item" href="{{ item.itemName|slugify }}/">
             <img src="{{ item.itemImage }}" alt="">
             <p class="itemName">{{ item.itemName }}</p>
             <p class="itemprice">${{ item.itemprice }}</p>
-        {% endfor %}
         </a>
+        {% endfor %}
+        
     </div>
 </div>
 {% endblock %}

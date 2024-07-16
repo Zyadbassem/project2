@@ -107,6 +107,6 @@ def itemPage(request, clickedItemTitle):
             return HttpResponse('not valid')
         bidAdder = Bid(buyerId=activeUser.pk, itemId=clickedItem.pk, bidAmount=newBid)
         bidAdder.save()
-        return redirect('itempage')
-    return render(request, 'shop/itemPage.html')
+        return redirect('itemPage')
+    return render(request, 'shop/itemPage.html', {'item': clickedItem})
         
