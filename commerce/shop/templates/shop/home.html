@@ -6,7 +6,7 @@
         <a class="item" href="/{{ item.itemName }}">
             <img src="{{ item.itemImage }}" alt="">
             <p class="itemName">{{ item.itemName }}</p>
-            <p class="itemprice">{{ item.itemprice }}</p>
+            <p class="itemprice">${{ item.itemprice }}</p>
         {% endfor %}
         </a>
     </div>

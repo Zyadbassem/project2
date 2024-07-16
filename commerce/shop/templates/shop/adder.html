@@ -2,7 +2,7 @@
 {% block main %}
 <main>
     <h2 class="text-over-form">add new item</h2>
-    <form class="registerInputs" action="{% url 'selingItem' %}" method="post">
+    <form class="registerInputs" action="{% url 'addItems' %}" method="post">
         {% csrf_token %}
         <input type="text" placeholder="item title" autocomplete="off" autofocus name="item_name" required>
         <input type="number" placeholder="item price in $" autocomplete="off" name="item_price" min="1" required>

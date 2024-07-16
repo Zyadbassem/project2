@@ -15,7 +15,7 @@
         <a href="/"><h1>StolenThings</h1></a>
         <div class="headerLinks">
             {% if username %}
-            <a href="/" id="add-button">+</a>
+            <a href="{% url 'addItems' %}" id="add-button">+</a>
             <a href="/">{{ username }}</a>
             <a href="{% url 'logout' %}">logout</a>
             {% else %}
