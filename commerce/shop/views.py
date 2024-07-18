@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import User, Item, Bid
+from .models import User, ItemUpdated, Bid
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import logout as django_logout
 def sign(request):
@@ -59,7 +59,7 @@ def register(request):
 def home(request):
     #check if user is logged in
     if 'username' in request.session:
-        allItems = Item.objects.all()
+        allItems = ItemUpdated.objects.all()
         return render(request, 'shop/home.html', {'username': request.session['username'], 'items': allItems})
     #if user isn't logged in
     else:
@@ -84,7 +84,7 @@ def addItems(request):
             if not item_Image or not item_Price or not item_Title:
                 return render(request, 'shop/adder.html', {'username': request.session['username'], 'error': 'Invalid input'})
             #create a new item and saving it
-            newItem = Item(itemName=item_Title, itemprice=item_Price, itemImage=item_Image)
+            newItem = ItemUpdated(item_name=item_Title, item_price=item_Price, item_image=item_Image)
             newItem.save()
             #redirecting to home page
             return redirect('home')
@@ -95,18 +95,21 @@ def addItems(request):
 
 def itemPage(request, clickedItemTitle):
     #get the clicked item
-    clickedItem = Item.objects.filter(itemName= clickedItemTitle).first()
+    clickedItem = ItemUpdated.objects.filter(item_name= clickedItemTitle).first()
     #get user info
     activeUser = User.objects.filter(username=request.session['username']).first()
     if not clickedItem:
         return HttpResponse('404item not found')
     #if the user sends a form 
     if request.method == 'POST':
-        newBid = request.POST.get('newBid')
-        if not newBid or newBid < int(clickedItem.itemprice):
-            return HttpResponse('not valid')
-        bidAdder = Bid(buyerId=activeUser.pk, itemId=clickedItem.pk, bidAmount=newBid)
+        #get the new bid the user will enter
+        newBid = int(request.POST.get('newBid'))
+        if not newBid or newBid < float(clickedItem.itemprice):
+            return render(request, 'shop/itemPage.html', {'item': clickedItem, 'username': activeUser.username, 'error': 'bid not valid'})
+        bidAdder = Bid(buyerId=activeUser, itemId=clickedItem, bidAmount=newBid)
         bidAdder.save()
-        return redirect('itemPage')
-    return render(request, 'shop/itemPage.html', {'item': clickedItem})
+        clickedItem.itemprice = str(newBid)
+        clickedItem.save()
+        return render(request, 'shop/itemPage.html', {'item': clickedItem, 'username': activeUser.username})
+    return render(request, 'shop/itemPage.html', {'item': clickedItem, 'username': activeUser.username})
         

@@ -1,13 +1,8 @@
 from django.contrib import admin
-from shop.models import Item
-from shop.models import User
-from shop.models import Bid
+from shop.models import User, Bid, ItemUpdated
 
 
-class ItemAdmin(admin.ModelAdmin):
-    pass
 
-admin.site.register(Item, ItemAdmin)
 
 class UserAdmin(admin.ModelAdmin):
     pass
@@ -18,4 +13,10 @@ class BidAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Bid, BidAdmin)
+
+class ItemUpdatedAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(ItemUpdated, ItemUpdatedAdmin)
+
 # Register your models here.

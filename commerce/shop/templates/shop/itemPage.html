@@ -1,12 +1,13 @@
 {% extends 'shop/layout.html' %}
 {% block main %}
 <main id="itemPageView">
-    <img src="{{ item.itemImage }}" alt="item" class="big-image">
+    <img src="{{ item.item_image }}" alt="item" class="big-image">
     <div class="itemPagetextContainer">
-        <p class="imageItemTitle">{{ item.itemName }}</p>
-        <p class="imageItemprice">{{ item.itemprice }}</p>
-        <form action="" class="registerInputs">
-            <input type="number" placeholder="newBid">
+        <p class="imageItemTitle">{{ item.item_name }}</p>
+        <p class="imageItemprice">${{ item.item_price }}</p>
+        <form action="{{ item.item_name }}" class="registerInputs" method="post">
+            {% csrf_token %}
+            <input type="number" placeholder="Bid" name="newBid">
             <button class="sign-button" type="submit">Bid</button>
         </form>    
         {% if error %}

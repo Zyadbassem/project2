@@ -186,6 +186,21 @@ img {
     text-align: center;
 }
 
+.types {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+    width: 80%;
+    max-width: 900px;
+    margin-left: 40px;
+}
+.types a {
+    padding: 5px 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+ }
+
 @media (max-width: 850px){
     .item {
         width: 45%;

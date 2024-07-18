@@ -12,11 +12,11 @@
 </head>
 <body>
     <header>
-        <a href="/"><h1>StolenThings</h1></a>
+        <a href="{% url 'home' %}"><h1>StolenThings</h1></a>
         <div class="headerLinks">
             {% if username %}
             <a href="{% url 'addItems' %}" id="add-button">+</a>
-            <a href="/">{{ username }}</a>
+            <a>{{ username }}</a>
             <a href="{% url 'logout' %}">logout</a>
             {% else %}
             <a href="{% url 'sign' %}">sign in</a>
