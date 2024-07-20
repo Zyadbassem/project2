@@ -68,7 +68,7 @@ header h1 {
     padding-bottom: 20px;
 }
 
-.registerInputs input {
+.registerInputs input, textarea, select {
     margin: 8px;
     padding: 6px 22px;
     background-color: transparent;

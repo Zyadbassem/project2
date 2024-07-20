@@ -80,16 +80,18 @@ def addItems(request):
             item_Title = request.POST.get('item_name')
             item_Price = request.POST.get('item_price')
             item_Image = request.POST.get('item_image')
+            item_type  = request.POST.get('item_type')
+            item_description = request.POST.get('item_description')
             #check info
-            if not item_Image or not item_Price or not item_Title:
+            if not item_Image or not item_Price or not item_Title or not item_description or item_type == '':
                 return render(request, 'shop/adder.html', {'username': request.session['username'], 'error': 'Invalid input'})
             #create a new item and saving it
-            newItem = ItemUpdated(item_name=item_Title, item_price=item_Price, item_image=item_Image)
+            newItem = ItemUpdated(item_name=item_Title, item_price=item_Price, item_image=item_Image, item_description=item_description, item_type=item_type)
             newItem.save()
             #redirecting to home page
             return redirect('home')
         #if the user access the page with get
-        return render(request, 'shop/adder.html')
+        return render(request, 'shop/adder.html', {'username': request.session['username']})
     #if the user is not logged in 
     return redirect('sign')
 
@@ -104,12 +106,19 @@ def itemPage(request, clickedItemTitle):
     if request.method == 'POST':
         #get the new bid the user will enter
         newBid = int(request.POST.get('newBid'))
-        if not newBid or newBid < float(clickedItem.itemprice):
+        if not newBid or newBid < clickedItem.item_price:
             return render(request, 'shop/itemPage.html', {'item': clickedItem, 'username': activeUser.username, 'error': 'bid not valid'})
         bidAdder = Bid(buyerId=activeUser, itemId=clickedItem, bidAmount=newBid)
         bidAdder.save()
-        clickedItem.itemprice = str(newBid)
+        clickedItem.item_price = newBid
         clickedItem.save()
         return render(request, 'shop/itemPage.html', {'item': clickedItem, 'username': activeUser.username})
     return render(request, 'shop/itemPage.html', {'item': clickedItem, 'username': activeUser.username})
+def types(request, typeClicked):
+    if 'username' in request.session:
+        allItems = ItemUpdated.objects.filter(item_type=typeClicked)
+        return render(request, 'shop/home.html', {'username': request.session['username'], 'items': allItems})
+    #if user isn't logged in
+    else:
+        return redirect('sign')
         

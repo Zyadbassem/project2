@@ -7,4 +7,5 @@ urlpatterns = [
     path('logout/', views.logout, name="logout"),
     path('add/', views.addItems, name='addItems'),
     path('<str:clickedItemTitle>', views.itemPage, name='itemPage'),
+    path('type/<str:typeClicked>', views.types, name="types" )
 ]

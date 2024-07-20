@@ -1,9 +1,9 @@
 {% extends 'shop/layout.html' %}
 {% block main %}
 <div class="types">
-    <a href="/">games</a>
-    <a href="/">phones</a>
-    <a href="/">music</a>
+    <a href="{% url 'types' typeClicked='games' %}">games</a>
+    <a href="{% url 'types' typeClicked='phones' %}">phones</a>
+    <a href="{% url 'types' typeClicked='music' %}">music</a>
 </div>
 <div class="wrapper">
     <div class="itemsContainer">
